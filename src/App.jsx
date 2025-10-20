@@ -10,6 +10,8 @@ import AddNewService from './pages/AddNewService.jsx';
 import Appointments from './pages/Appointments.jsx';
 import AddNewAppointment from './pages/AddNewAppointment.jsx';  
 import ConfirmBooking from './pages/ConfirmBooking.jsx';
+import Sidebar from "./Components/Sidebar.jsx";
+import Dashboard from './pages/Dashboard.jsx';
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -19,8 +21,10 @@ function App() {
   return (
     <Router>  
       <Navbar />
+      
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/admin/dashboard' element={<Dashboard />} />
         <Route path='/services' element={<Services />} />
         <Route path='/services/add' element={<AddNewService />} />
         

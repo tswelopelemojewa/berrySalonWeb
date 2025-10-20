@@ -24,6 +24,7 @@ function Navigation() {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/Services">Services</Nav.Link>
             <Nav.Link href="/appointments">Appointments</Nav.Link>
+            <Nav.Link href="/admin/dashboard">Dashboard</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
           </Nav>
         </Container>
