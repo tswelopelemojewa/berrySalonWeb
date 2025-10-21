@@ -9,6 +9,8 @@ const Dashboard = () => {
   const [month, setMonth] = useState([]);
   const [services, setServices] = useState([]);
   const [popularServices, setPopularServices] = useState([]);
+  const [repeatUser, setRepeatUser] = useState([]);
+
 
   useEffect(() => {
     axiosClient.get("/today/appointments").then((res) => setToday(res.data));
@@ -16,6 +18,7 @@ const Dashboard = () => {
     axiosClient.get("/services").then((res) => setServices(res.data));
     // Fetch popular services
     axiosClient.get("/month/appointments/popular").then((res) => setPopularServices(res.data));
+    axiosClient.get("/month/appointments/repeat-users").then((res) => setRepeatUser(res.data));
 
   }, []);
 
@@ -84,39 +87,73 @@ const Dashboard = () => {
             <div className="md-4">
                 <Row className="mb-4">
                     <Col md={6}>
-                    <Card>
-                        <Card.Header>Most Popular Services (This Month)</Card.Header>
-                        <Card.Body>
-                        <Table striped bordered hover>
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Service Name</th>
-                                <th>Total Bookings</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {popularServices.length > 0 ? (
-                                popularServices.map((service, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{service.service_name}</td>
-                                    <td>{service.total_bookings}</td>
-                                </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                <td colSpan="3" className="text-center">
-                                    No bookings yet this month
-                                </td>
-                                </tr>
-                            )}
-                            </tbody>
-                        </Table>
-                        </Card.Body>
-                    </Card>
+                      <Card>
+                          <Card.Header>Most Popular Services (This Month)</Card.Header>
+                          <Card.Body>
+                          <Table striped bordered hover>
+                              <thead>
+                              <tr>
+                                  <th>#</th>
+                                  <th>Service Name</th>
+                                  <th>Total Bookings</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              {popularServices.length > 0 ? (
+                                  popularServices.map((service, index) => (
+                                  <tr key={index}>
+                                      <td>{index + 1}</td>
+                                      <td>{service.service_name}</td>
+                                      <td>{service.total_bookings}</td>
+                                  </tr>
+                                  ))
+                              ) : (
+                                  <tr>
+                                  <td colSpan="3" className="text-center">
+                                      No bookings yet this month
+                                  </td>
+                                  </tr>
+                              )}
+                              </tbody>
+                          </Table>
+                          </Card.Body>
+                      </Card>
                     </Col>
-                    </Row>
+                    <Col md={6}>
+                      <Card>
+                          <Card.Header>Regular Client (This Month)</Card.Header>
+                          <Card.Body>
+                          <Table striped bordered hover>
+                              <thead>
+                              <tr>
+                                  <th>#</th>
+                                  <th>Name</th>
+                                  <th>Total Bookings</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              {repeatUser.length > 0 ? (
+                                  repeatUser.map((client, index) => (
+                                  <tr key={index}>
+                                      <td>{index + 1}</td>
+                                      <td>{client.name}</td>
+                                      <td>{client.appointment_count}</td>
+                                  </tr>
+                                  ))
+                              ) : (
+                                  <tr>
+                                  <td colSpan="3" className="text-center">
+                                      No bookings yet this month
+                                  </td>
+                                  </tr>
+                              )}
+                              </tbody>
+                          </Table>
+                          </Card.Body>
+                      </Card>
+                    </Col>
+                </Row>
+                
             </div>
             </div>
         </div>

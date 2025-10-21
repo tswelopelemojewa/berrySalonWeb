@@ -2,14 +2,16 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Form, Row, Col, Button, ButtonGroup, Badge, Spinner, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axiosClient from '../api/axiosClient';
+
+const baseURL = 'https://berrysalon.onrender.com';
 
 const TimeSlotSelector = ({ date, serviceDurationMinutes, onSelectTime }) => {
   
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
-
+ 
   // Fetch upcoming appointments (we'll filter client-side by date)
   useEffect(() => {
     if (!date) {
@@ -19,7 +21,7 @@ const TimeSlotSelector = ({ date, serviceDurationMinutes, onSelectTime }) => {
     setLoading(true);
     setError('');
     axios
-      .get('http://localhost:3000/upcoming/appointments')
+      .get(`${baseURL}/upcoming/appointments/` )
       .then((res) => {
         // ensure array (if API returns single object, normalize)
         const data = Array.isArray(res.data) ? res.data : [res.data];
@@ -210,7 +212,7 @@ const AddNewAppointment = () => {
   // Fetch available services
   useEffect(() => {
     axios
-      .get('http://localhost:3000/services')
+      .get(`${baseURL}/services`)
       .then((res) => setServices(Array.isArray(res.data) ? res.data : [res.data]))
       .catch((err) => console.error('Error fetching services:', err));
   }, []);
@@ -228,7 +230,7 @@ const AddNewAppointment = () => {
     setLoading(true);
 
     try {
-      await axios.post('http://localhost:3000/new/appointments', formData);
+      await axios.post(`${baseURL}/new/appointments`, formData);
       alert('Appointment created successfully!');
       setFormData({
         name: '',
@@ -405,8 +407,7 @@ export default AddNewAppointment;
 //   // Fetch available services
 //   useEffect(() => {
 //     axios
-//       .get('http://localhost:3000/services')
-//       .then((res) => setServices(res.data))
+//       .get(`${baseURL}/serices`) //       .then((res) => setServices(res.data))
 //       .catch((err) => console.error('Error fetching services:', err));
 //   }, []);
 
@@ -423,7 +424,7 @@ export default AddNewAppointment;
 //     setLoading(true);
 
 //     try {
-//       await axios.post('http://localhost:3000/new/appointments', formData);
+//       await axios.post(`${baseURL}/newappointments`, formData);
 //       alert('Appointment created successfully!');
 //       setFormData({
 //         name: '',

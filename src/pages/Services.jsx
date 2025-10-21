@@ -7,13 +7,16 @@ import { Link } from 'react-router-dom';
 import { IoIosAddCircleOutline } from "react-icons/io";
 
 
+const baseURL = "https://berrysalon.onrender.com";
+
 const Services = () => {
   const [services, setServices] = useState([]);
+  
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await axiosClient.get('/services');
+        const res = await axiosClient.get(`/services`);
         console.log('Fetched services:', res.data);
         setServices(res.data);
       } catch (error) {
@@ -48,7 +51,7 @@ const Services = () => {
                       service.coverImg
                         ? (service.coverImg.startsWith('http')
                           ? service.coverImg
-                          : `http://localhost:3000/${service.coverImg}`) // ✅ use backend port (5000)
+                          : `${baseURL}/${service.coverImg}`) // ✅ use backend port (5000)
                         : '/default-image.png'
                     }
                     alt={service.name}

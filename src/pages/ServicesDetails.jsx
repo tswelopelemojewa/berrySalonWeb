@@ -5,6 +5,8 @@ import { Link, useParams } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
 import { IoIosAddCircleOutline } from "react-icons/io";
 
+const baseURL = 'https://berrysalon.onrender.com';
+
 
 const ServicesDetails = () => {
     const { id } = useParams();
@@ -60,7 +62,7 @@ const ServicesDetails = () => {
                                 detail.Image
                                 ? (detail.Image.startsWith('http')
                                     ? detail.Image
-                                    : `http://localhost:3000/${detail.Image}`) // ✅ use backend port (5000)
+                                    : `${baseURL}/${detail.Image}`) // ✅ use backend port (5000)
                                 : '/default-image.png'      
                             }
                             alt={detail.name}

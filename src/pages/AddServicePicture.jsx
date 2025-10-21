@@ -3,6 +3,8 @@ import axiosClient from '../api/axiosClient';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
+const baseURL = 'https://berrysalon.onrender.com';
+
 const AddServicePicture = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ const AddServicePicture = () => {
       formData.append('images', selectedFiles[i]);
     }
     try {
-      const res = await axios.post(`http://localhost:3000/services/${id}/add`, formData, {
+      const res = await axios.post(`${baseURL}/services/${id}/add`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
       console.log('Upload successful:', res.data);

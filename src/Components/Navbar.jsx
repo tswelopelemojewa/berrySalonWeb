@@ -3,9 +3,11 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-  export const backgroundImage = 'http://localhost:3000/uploads/background.jpg'; // Your image import
+const baseURL = 'https://berrysalon.onrender.com'; 
 
- export  const homeStyle = {
+export const backgroundImage = `${baseURL}/uploads/background.jpg`; // Your image import
+
+export  const homeStyle = {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0.8)), url(${backgroundImage})`,
     // backgroundImage: `url(${backgroundImage})`,
     backgroundColor: 'rgba(193, 186, 54, 0.53)', // Fallback color
