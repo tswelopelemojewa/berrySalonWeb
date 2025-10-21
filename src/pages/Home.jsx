@@ -2,6 +2,7 @@ import React from 'react';
 // import '../app.css';
 import Image from 'react-bootstrap/Image';
 import Services from "./Services.jsx";
+import Appointments from './Appointments.jsx';
 
 import { homeStyle } from '../Components/Navbar';
 import { Link } from 'react-router-dom';
@@ -12,7 +13,6 @@ export function Home() {
 
   return (
     <>  
-    // Apply the style to your main container
     <div  className="hero-section overlay"  style={homeStyle}>
 
         <div className="home-content" >
@@ -36,8 +36,12 @@ export function Home() {
       
     </div>
     {/* <br /> */}
-    <div className="hero-section" style={{marginBlockStart: '600px'}} >
+    <div className="hero-section" style={{marginBlockStart: '650px'}} >
       <Services />
+    </div>
+    <br />
+    <div className="hero-section" style={{marginBlockStart: '20px'}} >
+      <Appointments />
     </div>
 
     </>
