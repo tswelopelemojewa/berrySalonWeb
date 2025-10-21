@@ -1,8 +1,7 @@
 import React from 'react';
 // import '../app.css';
 import Image from 'react-bootstrap/Image';
-// import backgroundImage from '../assets/background.jpg'; // Your image import
-// import background2 from '../assets/1321230.png'; // Your image import
+import Services from "./Services.jsx";
 
 import { homeStyle } from '../Components/Navbar';
 import { Link } from 'react-router-dom';
@@ -12,10 +11,11 @@ export function Home() {
 
 
   return (
+    <>  
     // Apply the style to your main container
     <div  className="hero-section overlay"  style={homeStyle}>
-      {/* <div className="home-container"> */}
-        <div className="home-content">
+
+        <div className="home-content" >
           <h1 className="services-title">Welcome to Berry's Beauty Salon</h1> <br/>
           {/* <h1 className="home-title">Welcome to Berry's Beauty Salon</h1> */}
           {/* <h2 className="home-subtitle">Your Beauty, Our Duty</h2> */}
@@ -29,9 +29,18 @@ export function Home() {
             Book an Appointment
             </Link>
             </button>
+            
+            
         </div>
-      {/* </div> */}
+       
+      
     </div>
+    {/* <br /> */}
+    <div className="hero-section" style={{marginBlockStart: '600px'}} >
+      <Services />
+    </div>
+
+    </>
   );
 }
 
