@@ -69,7 +69,7 @@
   transition: transform 0.3s ease-in-out;
 }
 
-/* Optional: smooth zoom-in hover effect */
+
 .service-card:hover .service-img {
   transform: scale(1.05);
 } */

@@ -52,7 +52,6 @@
   position: relative;
   height: 100vh;
   background-image: url('http://localhost:3000/uploads/background.jpg');
-  /* background-image: url('/background.jpg'); */
   background-color: rgba(0, 0, 0, 0.5);
   background-size: cover;
   background-position: center;
@@ -65,7 +64,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 👈 your dark overlay */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
