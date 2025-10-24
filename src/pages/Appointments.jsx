@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axiosClient from '../api/axiosClient';
 import { Tab, Nav, Table } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { BsCheckCircle, BsCheckCircleFill, BsDashCircleDotted } from "react-icons/bs";
 
@@ -37,7 +38,8 @@ const updateStatus = async (appointmentId, userNumber, action) => {
   //The main table component
   const AppointmentTable = ({ appointments }) => (
   // <div style={{ marginTop: '20px', maxHeight: '70vh', overflowY: 'auto' }}>
-  <Table striped bordered hover responsive style={{ margin: 0 }}>
+  <>
+  {/* <Table striped bordered hover responsive style={{ margin: 0 }}>
     <thead style={{ position: 'sticky', top: 0, backgroundColor: '#121212', zIndex: 2 }} >
       <tr>
         <th>Name</th>
@@ -90,7 +92,45 @@ const updateStatus = async (appointmentId, userNumber, action) => {
         </tr>
       ))}
     </tbody>
-  </Table>
+  </Table> */}
+
+  <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+    {appointments.map((a) => (
+      <Col key={a.id}>
+        <Card className="service-card h-100 text-center">
+          {/* ✅ IMAGE SECTION */}
+          <Card.Body>
+            <h4>{a.name}</h4>
+            <p>{a.user_number}</p>
+            <h5>{a.appointment_date}</h5>
+            <p>{a.StartTime} - {a.EndTime}</p>
+            <p>{a.status}</p>
+            <p>{a.service_name}</p>
+            <BsDashCircleDotted 
+              title="Cancel Appoitment"
+              style={{cursor: 'pointer', marginRight: '12px', color: 'red' }}
+              onClick={() => updateStatus(a.id, a.user_number, 'cancel')}	
+	          /> 
+            
+            <BsCheckCircle 
+              title="Confirm Appointment"
+              style={{cursor: 'pointer', marginRight: '12px', color: 'Green'}}
+              onClick={() => updateStatus(a.id, a.user_number, 'confirm' )}
+            />
+            
+            <BsCheckCircleFill
+              title="Mark AS Complete"
+              style={{cursor: 'pointer', color: 'Blue'}}
+              onClick={() => updateStatus(a.id, a.user_number, 'complete')}
+            />
+          </Card.Body>
+        </Card>
+        
+      </Col>
+    ))}
+  </Row>
+      </>
+
 // </div>
 
 );
@@ -113,6 +153,7 @@ const updateStatus = async (appointmentId, userNumber, action) => {
           </Link>
         </button>
       </div>
+
 
       <Nav variant="tabs" activeKey={activeTab} onSelect={(k) => setActiveTab(k)} style={{ marginBottom: '15px' }}>
         <Nav.Item>
