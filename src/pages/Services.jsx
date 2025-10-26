@@ -48,11 +48,11 @@ const Services = () => {
                   <Card.Img
                     variant="top"
                     src={
-                      service.coverImg
-                        ? (service.coverImg.startsWith('http')
-                          ? service.coverImg
-                          : `${baseURL}/${service.coverImg}`) // ✅ use backend port (5000)
-                        : '/default-image.png'
+                      service.coverimg
+                        ? (service.coverimg.startsWith('http')
+                          ? service.coverimg
+                          : `${baseURL}/${service.coverimg}`) // ✅ use backend port (5000)
+                        : `${baseURL}/uploads/doma.jpg`
                     }
                     alt={service.name}
                     className="service-img"
