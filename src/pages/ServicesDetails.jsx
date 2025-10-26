@@ -59,10 +59,10 @@ const ServicesDetails = () => {
                         <Card.Img   
                             variant="top"
                             src={
-                                detail.Image
-                                ? (detail.Image.startsWith('http')
-                                    ? detail.Image
-                                    : `${baseURL}/${detail.Image}`) // ✅ use backend port (5000)
+                                detail.image
+                                ? (detail.image.startsWith('http')
+                                    ? detail.image
+                                    : `${baseURL}/${detail.image}`) // ✅ use backend port (5000)
                                 : '/default-image.png'      
                             }
                             alt={detail.name}
