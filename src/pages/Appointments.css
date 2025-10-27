@@ -1,0 +1,9 @@
+.add-icon {
+  font-size: 2rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease-in-out;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+
+}
