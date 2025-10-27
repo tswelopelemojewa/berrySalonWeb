@@ -140,80 +140,59 @@ const slots = useMemo(() => {
   }
 
   return (
-    <div style={{ marginTop: 12, width: '100%', maxWidth: 700 }}>
-      <div className="d-flex align-items-center mb-2 flex-wrap">
-        <strong style={{ marginRight: 12 }}>
-          Time slots ({formatTime(new Date(`${date}T00:00:00`))} → next day)
-        </strong>
+    <div style={{ marginTop: 12 }}>
+      <div className="d-flex align-items-center mb-2">
+        <strong style={{ marginRight: 12 }}>Time slots ({formatTime(new Date(`${date}T00:00:00`))} → next day)</strong>
         <Badge bg="success" className="me-1">Available</Badge>
         <Badge bg="danger" className="me-3">Booked</Badge>
-        <small className="text-muted">
-          Click an available slot to auto-fill the Time field.
-        </small>
+        <small className="text-muted">Click an available slot to auto-fill the Time field.</small>
       </div>
 
       {loading && (
-        <div className="mb-2">
-          <Spinner animation="border" size="sm" /> Loading appointments...
-        </div>
+        <div className="mb-2"><Spinner animation="border" size="sm" /> Loading appointments...</div>
       )}
       {error && <Alert variant="danger">{error}</Alert>}
 
-      {/* Timeline wrapper (confines the inner scrollable div) */}
+      {/* Timeline container */}
       <div
         style={{
-          width: '100%',
-          maxWidth: '100%',
+          display: 'flex',
           overflowX: 'auto',
+          padding: '8px 4px',
+          gap: 6,
           border: '1px solid #e9ecef',
           borderRadius: 6,
-          background: '#ffffff',
-          padding: 8,
-          boxSizing: 'border-box'
+          background: '#ffffff'
         }}
       >
-        {/* Inner flex row */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'nowrap',
-            maxWidth: 'max-content',
-            gap: 6,
-            minWidth: 'max-content' // ensures horizontal scroll, not stretch
-          }}
-        >
-          {slots.map((slot, idx) => {
-            const booked = isSlotBooked(slot);
-            const hour = slot.start.getHours();
-            const isRealistic = hour >= 5 && hour <= 22;
-
-            return (
-              <Button
-                key={idx}
-                size="sm"
-                variant={booked ? 'danger' : 'success'}
-                style={{
-                  minWidth: 90,
-                  whiteSpace: 'nowrap',
-                  opacity: isRealistic ? 1 : 0.55,
-                  borderRadius: 6,
-                  boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-                  flexShrink: 0
-                }}
-                disabled={booked}
-                onClick={() => onSelectTime(formatTime(slot.start))}
-                title={`${formatTime(slot.start)} → ${formatTime(slot.end)}${!isRealistic ? ' (outside typical hours)' : ''}`}
-              >
-                <div style={{ fontSize: 12, fontWeight: 600 }}>{formatTime(slot.start)}</div>
-                <div style={{ fontSize: 11, opacity: 0.9 }}>{formatTime(slot.end)}</div>
-              </Button>
-            );
-          })}
-        </div>
+        {slots.map((slot, idx) => {
+          const booked = isSlotBooked(slot);
+          // mark realistic booking hours visually (dim outside 05:00-22:00)
+          const hour = slot.start.getHours();
+          const isRealistic = hour >= 5 && hour <= 22;
+          return (
+            <Button
+              key={idx}
+              size="sm"
+              variant={booked ? 'danger' : 'success'}
+              style={{
+                minWidth: 90,
+                whiteSpace: 'nowrap',
+                opacity: isRealistic ? 1 : 0.55,
+                borderRadius: 6,
+                boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+              }}
+              disabled={booked}
+              onClick={() => onSelectTime(formatTime(slot.start))}
+              title={`${formatTime(slot.start)} → ${formatTime(slot.end)}${!isRealistic ? ' (outside typical hours)' : ''}`}
+            >
+              <div style={{ fontSize: 12, fontWeight: 600 }}>{formatTime(slot.start)}</div>
+              <div style={{ fontSize: 11, opacity: 0.9 }}>{formatTime(slot.end)}</div>
+            </Button>
+          );
+        })}
       </div>
     </div>
-
-
   );
 };
 
@@ -288,10 +267,10 @@ const AddNewAppointment = () => {
   };
 
   return (
-    <div className="form-control" style={{ maxWidth: '80%', margin: 'auto', padding: '30px' }}>
+    <div className="form-control" style={{ maxWidth: '800px', margin: 'auto', padding: '30px' }}>
       <h3 style={{ paddingBottom: '16px' }}>Add New Appointment</h3>
 
-      <form onSubmit={handleSubmit} style={{maxWidth: '80%'}}>
+      <form onSubmit={handleSubmit}>
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
         {/* Name */}
@@ -368,32 +347,13 @@ const AddNewAppointment = () => {
 
         {/* Timeline selector under date picker */}
         <div style={{ marginBottom: '10px' }}>
-          {/* <Col sm={{ span: 9, offset: 3 }}>
+          <Col sm={{ span: 9, offset: 3 }}>
             <TimeSlotSelector
               date={formData.date}
               serviceDurationMinutes={serviceDurationMinutes}
               onSelectTime={handleSlotSelect}
             />
-          </Col> */}
-          <Col sm={{ span: 9, offset: 3 }}>
-            <div
-              style={{
-                background: '#1e1e1e', // match dark form
-                borderRadius: 6,
-                padding: '8px 10px',
-                border: '1px solid #333', // optional subtle border
-                minHeight: 120, // keeps height consistent even before selection
-                transition: 'all 0.3s ease'
-              }}
-            >
-              <TimeSlotSelector
-                date={formData.date}
-                serviceDurationMinutes={serviceDurationMinutes}
-                onSelectTime={handleSlotSelect}
-              />
-            </div>
           </Col>
-
         </div>
 
         {/* Time Picker (filled when user clicks a slot) */}
@@ -424,3 +384,170 @@ const AddNewAppointment = () => {
 };
 
 export default AddNewAppointment;
+
+
+// import React, { useState, useEffect } from 'react';
+// import { Form, Row, Col } from 'react-bootstrap';
+// import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+
+// const AddNewAppointment = () => {
+//     const navigate = useNavigate();
+//   const [formData, setFormData] = useState({
+//     name: '',
+//     user_number: '',
+//     serviceId: '',
+//     date: '',
+//     time: ''
+//   });
+//   const [services, setServices] = useState([]);
+//   const [error, setError] = useState('');
+//   const [loading, setLoading] = useState(false);
+
+//   // Fetch available services
+//   useEffect(() => {
+//     axios
+//       .get(`${baseURL}/serices`) //       .then((res) => setServices(res.data))
+//       .catch((err) => console.error('Error fetching services:', err));
+//   }, []);
+
+//   // Handle input changes
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   // Submit form
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setError('');
+//     setLoading(true);
+
+//     try {
+//       await axios.post(`${baseURL}/newappointments`, formData);
+//       alert('Appointment created successfully!');
+//       setFormData({
+//         name: '',
+//         user_number: '',
+//         serviceId: '',
+//         date: '',
+//         time: ''
+//       });
+
+//         navigate('/appointments');
+//     } catch (err) {
+//       if (err.response?.status === 400) {
+//         setError(err.response.data.error || 'That slot is already booked.');
+//       } else {
+//         setError('Something went wrong, please try again.');
+//       }
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className='form-control' style={{ maxWidth: "600px", margin: "auto", padding: "30px" }}>
+//       <h3 style={{ paddingBottom: "30px" }}>Add New Appointment</h3>
+
+//       <form onSubmit={handleSubmit}>
+//         {error && <p style={{ color: 'red' }}>{error}</p>}
+
+//         {/* Name */}
+//         <div style={{ marginBottom: "10px" }}>
+//           <Form.Group as={Row} className="mb-2" controlId="formName">
+//             <Form.Label column sm="3">Name:</Form.Label>
+//             <Col sm="9">
+//               <Form.Control
+//                 type="text"
+//                 name="name"
+//                 placeholder="Enter name"
+//                 value={formData.name}
+//                 onChange={handleChange}
+//                 required
+//               />
+//             </Col>
+//           </Form.Group>
+//         </div>
+
+//         {/* User Number */}
+//         <div style={{ marginBottom: "10px" }}>
+//           <Form.Group as={Row} className="mb-2" controlId="formNumber">
+//             <Form.Label column sm="3">Number:</Form.Label>
+//             <Col sm="9">
+//               <Form.Control
+//                 type="text"
+//                 name="user_number"
+//                 placeholder="e.g. 27831234567"
+//                 value={formData.user_number}
+//                 onChange={handleChange}
+//                 required
+//               />
+//             </Col>
+//           </Form.Group>
+//         </div>
+
+//         {/* Service Dropdown */}
+//         <div style={{ marginBottom: "10px" }}>
+//           <Form.Group as={Row} className="mb-2" controlId="formService">
+//             <Form.Label column sm="3">Service:</Form.Label>
+//             <Col sm="9">
+//               <Form.Select
+//                 name="serviceId"
+//                 value={formData.serviceId}
+//                 onChange={handleChange}
+//                 required
+//               >
+//                 <option value="">-- Select a Service --</option>
+//                 {services.map((service) => (
+//                   <option key={service.id} value={service.id}>
+//                     {service.name}
+//                   </option>
+//                 ))}
+//               </Form.Select>
+//             </Col>
+//           </Form.Group>
+//         </div>
+
+//         {/* Date Picker */}
+//         <div style={{ marginBottom: "10px" }}>
+//           <Form.Group as={Row} className="mb-2" controlId="formDate">
+//             <Form.Label column sm="3">Date:</Form.Label>
+//             <Col sm="9">
+//               <Form.Control
+//                 type="date"
+//                 name="date"
+//                 value={formData.date}
+//                 onChange={handleChange}
+//                 required
+//               />
+//             </Col>
+//           </Form.Group>
+//         </div>
+
+//         {/* Time Picker */}
+//         <div style={{ marginBottom: "10px" }}>
+//           <Form.Group as={Row} className="mb-2" controlId="formTime">
+//             <Form.Label column sm="3">Time:</Form.Label>
+//             <Col sm="9">
+//               <Form.Control
+//                 type="time"
+//                 name="time"
+//                 value={formData.time}
+//                 onChange={handleChange}
+//                 required
+//               />
+//             </Col>
+//           </Form.Group>
+//         </div>
+
+//         {/* Submit */}
+//         <button style={{ marginTop: "10px" }} className="btn btn-success" type="submit" disabled={loading}>
+//           {loading ? "Saving..." : "Add Appointment"}
+//         </button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default AddNewAppointment;
