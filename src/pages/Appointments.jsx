@@ -108,21 +108,18 @@ const updateStatus = async (appointmentId, userNumber, action) => {
             <p>{a.service_name}</p>
             <BsDashCircleDotted 
               title="Cancel Appoitment"
-              //className='add-icon'
               style={{cursor: 'pointer', marginRight: '25px', color: 'red', fontSize: '2rem' }}
               onClick={() => updateStatus(a.id, a.user_number, 'cancel')}	
 	          /> 
             
             <BsCheckCircle 
               title="Confirm Appointment"
-              //className='add-icon'
               style={{cursor: 'pointer', marginRight: '25px', color: 'Green', fontSize: '2rem'}}
               onClick={() => updateStatus(a.id, a.user_number, 'confirm' )}
             />
             
             <BsCheckCircleFill
               title="Mark AS Complete"
-              //className='add-icon'
               style={{cursor: 'pointer', color: 'Blue', fontSize: '2rem'}}
               onClick={() => updateStatus(a.id, a.user_number, 'complete')}
             />
@@ -150,9 +147,9 @@ const updateStatus = async (appointmentId, userNumber, action) => {
     </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
         <h5 style={{ marginBottom: '20px' }}>Manage your appointments</h5>
-        <button className="book-btn" style={{ marginBottom: '20px', border: 'none', padding: '10px 20px', marginRight: '10px', alignItems: 'flex-end' }}>
+        <button className="book-btn" style={{ marginBottom: '10px', border: 'none', padding: '5px 10px', marginRight: '10px', alignItems: 'flex-end' }}>
           <Link to="/new/appointments" style={{ textDecoration: 'none', color: 'white' }}>
-          Book an Appointment
+          Add Appointment
           </Link>
         </button>
       </div>
