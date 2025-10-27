@@ -141,13 +141,15 @@ const updateStatus = async (appointmentId, userNumber, action) => {
   }, [activeTab]);
 
   return (
-    <div style={{ padding: '30px', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-      <div>
+    <div style={{  minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+      {/* <div> */}
       <h3 style={{ marginBottom: '20px' }}>Appointments</h3> 
-    </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-        <h5 style={{ marginBottom: '20px' }}>Manage your appointments</h5>
-        <button className="book-btn" style={{ marginBottom: '10px', border: 'none', padding: '5px 10px', marginRight: '10px', alignItems: 'flex-end' }}>
+       
+      <h5 style={{ marginBottom: '20px' }}>Manage your appointments</h5>
+    {/* </div> */}
+    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+       
+        <button className="book-btn" style={{ marginBottom: '10px', border: 'none', padding: '10px 20px', marginRight: '10px', alignItems: 'flex-end' }}>
           <Link to="/new/appointments" style={{ textDecoration: 'none', color: 'white' }}>
           Add Appointment
           </Link>
