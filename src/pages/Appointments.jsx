@@ -108,22 +108,22 @@ const updateStatus = async (appointmentId, userNumber, action) => {
             <p>{a.service_name}</p>
             <BsDashCircleDotted 
               title="Cancel Appoitment"
-              className='add-icon'
-              style={{cursor: 'pointer', marginRight: '20px', color: 'red' }}
+              //className='add-icon'
+              style={{cursor: 'pointer', marginRight: '25px', color: 'red', fontSize: '2rem' }}
               onClick={() => updateStatus(a.id, a.user_number, 'cancel')}	
 	          /> 
             
             <BsCheckCircle 
               title="Confirm Appointment"
-              className='add-icon'
-              style={{cursor: 'pointer', marginRight: '20px', color: 'Green'}}
+              //className='add-icon'
+              style={{cursor: 'pointer', marginRight: '25px', color: 'Green', fontSize: '2rem'}}
               onClick={() => updateStatus(a.id, a.user_number, 'confirm' )}
             />
             
             <BsCheckCircleFill
               title="Mark AS Complete"
-              className='add-icon'
-              style={{cursor: 'pointer', color: 'Blue'}}
+              //className='add-icon'
+              style={{cursor: 'pointer', color: 'Blue', fontSize: '2rem'}}
               onClick={() => updateStatus(a.id, a.user_number, 'complete')}
             />
           </Card.Body>
