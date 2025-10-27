@@ -177,7 +177,7 @@ const slots = useMemo(() => {
           style={{
             display: 'flex',
             flexWrap: 'nowrap',
-            maxWidth: '80%',
+            maxWidth: 'max-content',
             gap: 6,
             minWidth: 'max-content' // ensures horizontal scroll, not stretch
           }}
@@ -288,141 +288,138 @@ const AddNewAppointment = () => {
   };
 
   return (
-      <div className='fluid-container' style={{ maxWidth: '80%', margin: '40px auto' }}>
-        <div className="form-control" style={{ margin: 'auto', padding: '30px' }}>
-          <h3 style={{ paddingBottom: '16px' }}>Add New Appointment</h3>
+    <div className="form-control" style={{ maxWidth: '80%', margin: 'auto', padding: '30px' }}>
+      <h3 style={{ paddingBottom: '16px' }}>Add New Appointment</h3>
 
-          <form onSubmit={handleSubmit} style={{maxWidth: '80%'}}>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+      <form onSubmit={handleSubmit} style={{maxWidth: '80%'}}>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
 
-            {/* Name */}
-            <div style={{ marginBottom: '10px' }}>
-              <Form.Group as={Row} className="mb-2" controlId="formName">
-                <Form.Label column sm="3">Name:</Form.Label>
-                <Col sm="9">
-                  <Form.Control
-                    type="text"
-                    name="name"
-                    placeholder="Enter name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </Col>
-              </Form.Group>
-            </div>
-
-            {/* User Number */}
-            <div style={{ marginBottom: '10px' }}>
-              <Form.Group as={Row} className="mb-2" controlId="formNumber">
-                <Form.Label column sm="3">Number:</Form.Label>
-                <Col sm="9">
-                  <Form.Control
-                    type="text"
-                    name="user_number"
-                    placeholder="e.g. 27831234567"
-                    value={formData.user_number}
-                    onChange={handleChange}
-                    required
-                  />
-                </Col>
-              </Form.Group>
-            </div>
-
-            {/* Service Dropdown */}
-            <div style={{ marginBottom: '10px' }}>
-              <Form.Group as={Row} className="mb-2" controlId="formService">
-                <Form.Label column sm="3">Service:</Form.Label>
-                <Col sm="9">
-                  <Form.Select
-                    name="serviceId"
-                    value={formData.serviceId}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">-- Select a Service --</option>
-                    {services.map((service) => (
-                      <option key={service.id} value={service.id}>
-                        {service.name} {service.duration_minutes ? `(${service.duration_minutes}m)` : ''}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </Col>
-              </Form.Group>
-            </div>
-
-            {/* Date Picker */}
-            <div style={{ marginBottom: '10px' }}>
-              <Form.Group as={Row} className="mb-2" controlId="formDate">
-                <Form.Label column sm="3">Date:</Form.Label>
-                <Col sm="9">
-                  <Form.Control
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    required
-                  />
-                </Col>
-              </Form.Group>
-            </div>
-
-            {/* Timeline selector under date picker */}
-            <div style={{ marginBottom: '10px' }}>
-              {/* <Col sm={{ span: 9, offset: 3 }}>
-                <TimeSlotSelector
-                  date={formData.date}
-                  serviceDurationMinutes={serviceDurationMinutes}
-                  onSelectTime={handleSlotSelect}
-                />
-              </Col> */}
-              <Col sm={{ span: 9, offset: 3 }}>
-                <div
-                  style={{
-                    background: '#1e1e1e', // match dark form
-                    borderRadius: 6,
-                    padding: '8px 10px',
-                    border: '1px solid #333', // optional subtle border
-                    minHeight: 120, // keeps height consistent even before selection
-                    transition: 'all 0.3s ease'
-                  }}
-                >
-                  <TimeSlotSelector
-                    date={formData.date}
-                    serviceDurationMinutes={serviceDurationMinutes}
-                    onSelectTime={handleSlotSelect}
-                  />
-                </div>
-              </Col>
-
-            </div>
-
-            {/* Time Picker (filled when user clicks a slot) */}
-            <div style={{ marginBottom: '10px' }}>
-              <Form.Group as={Row} className="mb-2" controlId="formTime">
-                <Form.Label column sm="3">Time:</Form.Label>
-                <Col sm="9">
-                  <Form.Control
-                    type="time"
-                    name="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    required
-                  />
-                </Col>
-              </Form.Group>
-            </div>
-
-            {/* Submit */}
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <button style={{ marginTop: '10px' }} className="btn btn-success" type="submit" disabled={loading}>
-                {loading ? 'Saving...' : 'Add Appointment'}
-              </button>
-            </div>
-          </form>
+        {/* Name */}
+        <div style={{ marginBottom: '10px' }}>
+          <Form.Group as={Row} className="mb-2" controlId="formName">
+            <Form.Label column sm="3">Name:</Form.Label>
+            <Col sm="9">
+              <Form.Control
+                type="text"
+                name="name"
+                placeholder="Enter name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </Col>
+          </Form.Group>
         </div>
-      </div>
-    
+
+        {/* User Number */}
+        <div style={{ marginBottom: '10px' }}>
+          <Form.Group as={Row} className="mb-2" controlId="formNumber">
+            <Form.Label column sm="3">Number:</Form.Label>
+            <Col sm="9">
+              <Form.Control
+                type="text"
+                name="user_number"
+                placeholder="e.g. 27831234567"
+                value={formData.user_number}
+                onChange={handleChange}
+                required
+              />
+            </Col>
+          </Form.Group>
+        </div>
+
+        {/* Service Dropdown */}
+        <div style={{ marginBottom: '10px' }}>
+          <Form.Group as={Row} className="mb-2" controlId="formService">
+            <Form.Label column sm="3">Service:</Form.Label>
+            <Col sm="9">
+              <Form.Select
+                name="serviceId"
+                value={formData.serviceId}
+                onChange={handleChange}
+                required
+              >
+                <option value="">-- Select a Service --</option>
+                {services.map((service) => (
+                  <option key={service.id} value={service.id}>
+                    {service.name} {service.duration_minutes ? `(${service.duration_minutes}m)` : ''}
+                  </option>
+                ))}
+              </Form.Select>
+            </Col>
+          </Form.Group>
+        </div>
+
+        {/* Date Picker */}
+        <div style={{ marginBottom: '10px' }}>
+          <Form.Group as={Row} className="mb-2" controlId="formDate">
+            <Form.Label column sm="3">Date:</Form.Label>
+            <Col sm="9">
+              <Form.Control
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                required
+              />
+            </Col>
+          </Form.Group>
+        </div>
+
+        {/* Timeline selector under date picker */}
+        <div style={{ marginBottom: '10px' }}>
+          {/* <Col sm={{ span: 9, offset: 3 }}>
+            <TimeSlotSelector
+              date={formData.date}
+              serviceDurationMinutes={serviceDurationMinutes}
+              onSelectTime={handleSlotSelect}
+            />
+          </Col> */}
+          <Col sm={{ span: 9, offset: 3 }}>
+            <div
+              style={{
+                background: '#1e1e1e', // match dark form
+                borderRadius: 6,
+                padding: '8px 10px',
+                border: '1px solid #333', // optional subtle border
+                minHeight: 120, // keeps height consistent even before selection
+                transition: 'all 0.3s ease'
+              }}
+            >
+              <TimeSlotSelector
+                date={formData.date}
+                serviceDurationMinutes={serviceDurationMinutes}
+                onSelectTime={handleSlotSelect}
+              />
+            </div>
+          </Col>
+
+        </div>
+
+        {/* Time Picker (filled when user clicks a slot) */}
+        <div style={{ marginBottom: '10px' }}>
+          <Form.Group as={Row} className="mb-2" controlId="formTime">
+            <Form.Label column sm="3">Time:</Form.Label>
+            <Col sm="9">
+              <Form.Control
+                type="time"
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
+                required
+              />
+            </Col>
+          </Form.Group>
+        </div>
+
+        {/* Submit */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <button style={{ marginTop: '10px' }} className="btn btn-success" type="submit" disabled={loading}>
+            {loading ? 'Saving...' : 'Add Appointment'}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
