@@ -79,7 +79,7 @@ const ServicesDetails = () => {
                 setCurrentIndex(updatedDetails.length - 1); 
             }
             
-            alert('Image deleted successfully!');
+            // alert('Image deleted successfully!');
         } catch (err) {
             console.error('Error deleting image:', err);
             setError('Error deleting image. Please try again.');

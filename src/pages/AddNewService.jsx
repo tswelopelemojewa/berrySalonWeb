@@ -58,8 +58,11 @@ const AddNewService = () => {
             const res = await axiosClient.post('/services/add', data, {
                 headers: { 'Content-Type': 'multipart/form-data' }, 
             });
+           
             console.log('Service created:', res.data);
-            alert('Service created successfully!');
+           
+           
+            // alert('Service created successfully!');
             navigate(`/services/${res.data.id}`);
 
         } catch (err) {

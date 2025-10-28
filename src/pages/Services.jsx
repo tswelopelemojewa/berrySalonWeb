@@ -49,10 +49,8 @@ const Services = () => {
                     variant="top"
                     src={
                       service.coverImg
-                        ? (service.coverImg.startsWith('http')
-                          ? service.coverImg
-                          : `${baseURL}/${service.coverImg}`) // ✅ use backend port (5000)
-                        : `${baseURL}/uploads/doma.jpg`
+                        ? service.coverImg 
+                        : `https://bygwxdfqsfvxfcgoyxzx.supabase.co/storage/v1/object/public/services/1760528900400.jpg`
                     }
                     alt={service.name}
                     className="service-img"
