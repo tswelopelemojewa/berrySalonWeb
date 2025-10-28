@@ -61,9 +61,11 @@ const AddNewService = () => {
            
             console.log('Service created:', res.data);
            
-           
-            // alert('Service created successfully!');
-            navigate(`/services/${res.data.id}`);
+           // ✅ FIX: Access the ID inside the 'service' object
+            const newServiceId = res.data.service.id; 
+            
+            // Use the correctly retrieved ID for navigation
+            navigate(`/services/${newServiceId}`);
 
         } catch (err) {
             console.error('Error creating service:', err);

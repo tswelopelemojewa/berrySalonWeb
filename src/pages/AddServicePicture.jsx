@@ -34,7 +34,7 @@ const AddServicePicture = () => {
       headers: { "Content-Type": "multipart/form-data" },
     });
       console.log('Upload successful:', res.data);
-      alert('Images uploaded successfully!');
+      //alert('Images uploaded successfully!');
       useSelectedFiles([]);
       navigate(`/services/${id}`);
     } catch (error) {
