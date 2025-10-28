@@ -6,7 +6,7 @@ import About from "./pages/About.jsx";
 import Navbar from './Components/Navbar.jsx';
 import ServicesDetails from "./pages/ServicesDetails.jsx";
 import AddServicePicture from './pages/AddServicePicture.jsx';
-import AddNewService from './pages/AddNewService.jsx';
+import ServiceForm from './pages/ServiceForm.jsx';
 import Appointments from './pages/Appointments.jsx';
 import AddNewAppointment from './pages/AddNewAppointment.jsx';  
 import ConfirmBooking from './pages/ConfirmBooking.jsx';
@@ -26,7 +26,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/admin/dashboard' element={<Dashboard />} />
         <Route path='/services' element={<Services />} />
-        <Route path='/services/add' element={<AddNewService />} />
+        <Route path='/services/add' element={<ServiceForm />} />
+        <Route path='/services/edit/:id' element={<ServiceForm />} />
         
         <Route path='/about' element={<About />} />
         <Route path='*' element={<div>404 Not Found</div>} />

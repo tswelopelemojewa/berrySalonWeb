@@ -43,7 +43,7 @@ const Services = () => {
             
             // On success, update the state by filtering out the deleted service
             setServices(prevServices => prevServices.filter(service => service.id !== serviceId));
-            alert('Service deleted successfully!');
+            // alert('Service deleted successfully!');
         } catch (error) {
             console.error('Error deleting service:', error);
             // Check for specific error status if needed (e.g., 404, 409)
