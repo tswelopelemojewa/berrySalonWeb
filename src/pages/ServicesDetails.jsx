@@ -53,21 +53,19 @@ const ServicesDetails = () => {
             </Card>
 
             {serviceDetails.map((detail) => (
-                <Col key={detail.id}>
-                <Card className="service-card h-100 text-center">   
+                <Col key={detail.gallery_id}>
+                <Card className="service-card h-100 text-center">
                     <div className="service-img-container">
-                        <Card.Img   
+                        <Card.Img 
                             variant="top"
                             src={
                                 detail.image
-                                ? (detail.image.startsWith('http')
-                                    ? detail.image
-                                    : `${baseURL}/${detail.image}`) // ✅ use backend port (5000)
-                                : '/default-image.png'      
+                                    ? detail.image // Supabase gives us the full public URL!
+                                    : '/default-image.png'
                             }
                             alt={detail.name}
                             className="service-img"
-                        />  
+                        />
                     </div>
                 </Card>
                 </Col>

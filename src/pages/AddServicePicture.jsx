@@ -25,7 +25,7 @@ const AddServicePicture = () => {
 
     // prepare the form data
     const formData = new FormData();
-    formData.append('service_Id', id);
+    formData.append('service_id', id);
     for (let i = 0; i < selectedFiles.length; i++) {
       formData.append('images', selectedFiles[i]);
     }
