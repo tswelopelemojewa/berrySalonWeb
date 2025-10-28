@@ -104,7 +104,7 @@ const ServiceForm = () => {
             let res;
             if (isEditMode) {
                 // If ID exists, use PUT method for UPDATE
-                res = await axiosClient.put(`/services/editing/${id}`, data, {
+                res = await axiosClient.put(`/services/${id}`, data, {
                     headers: { 'Content-Type': 'multipart/form-data' }, 
                 });
                 alert('Service updated successfully!');
