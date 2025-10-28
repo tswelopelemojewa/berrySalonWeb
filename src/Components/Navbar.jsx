@@ -22,7 +22,7 @@ function Navigation() {
     <>
       <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" fixed="top" bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="/">Berry's</Navbar.Brand>
+          <Navbar.Brand href="/">Berry's Beauty Salon</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
           <Navbar.Collapse id="responsive-navbar-nav">
