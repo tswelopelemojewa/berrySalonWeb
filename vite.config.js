@@ -10,6 +10,11 @@ export default defineConfig({
   },
   server: {
     historyApiFallback: true
+  },
+  // This helps with routing
+  preview: {
+    port: 4173,
+    strictPort: true,
   }
 }
 
