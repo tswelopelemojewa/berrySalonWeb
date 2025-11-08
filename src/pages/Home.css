@@ -1,0 +1,25 @@
+.home-container {
+  background-image: url('../assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.hero-section {
+  /* Your other styles like height, display, etc. */
+
+  /* This is the key line */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0.54)), url('path-to-your-image.jpg');
+
+  /* Ensure the background covers the element */
+  background-size: cover;
+  background-position: center;
+
+  /* Make sure your text is visible */
+  color: white; 
+}

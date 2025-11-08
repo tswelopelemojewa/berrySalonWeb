@@ -1,0 +1,159 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.services-title {
+  color: #e91e63;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.home-container {
+  position: relative;
+  height: 100vh;
+  background-image: url('http://localhost:3000/uploads/background.jpg');
+  background-color: rgba(0, 0, 0, 0.5);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-content {
+  text-align: center;
+  color: white;
+  padding: 0 20px;
+}
+
+.home-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.home-subtitle {
+  font-size: 1.2rem;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  color: #f8f8f8;
+  max-width: 600px;
+  line-height: 1.6;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.book-btn {
+  background-color: #e91e63;
+  border: none;
+  padding: 12px 30px;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  transition: 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: #d81b60;
+  transform: scale(1.05);
+}
+
+
+/* Modal styling */
+/* For the modal backdrop to look like a lightbox */
+.modal-backdrop.show {
+    opacity: 0.9 !important; /* Slightly darker background */
+}
+
+/* Style for the clickable image in the grid */
+.clickable-img {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.clickable-img:hover {
+    transform: scale(1.03); /* Subtle hover effect */
+}
+
+/* Positioning for the navigation buttons inside the modal */
+.image-modal-dialog .modal-body {
+    position: relative;
+    /* Ensure the body is centered and takes up a good portion of the screen */
+}
+
+.modal-nav-button {
+    /* Use !important if Bootstrap styles are overriding */
+    position: absolute !important;
+    top: 50%;
+    z-index: 1000; /* Ensure buttons are above the image */
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+    border-radius: 50%;
+    color: white !important;
+    transition: background 0.2s;
+}
+
+.modal-nav-button:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.prev-button {
+    left: 20px;
+}
+
+.next-button {
+    right: 20px;
+}
+
+/* End of Modal styling */
