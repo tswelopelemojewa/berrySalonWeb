@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import Services from "./pages/Services.jsx";
@@ -11,43 +11,60 @@ import Appointments from './pages/Appointments.jsx';
 import AddNewAppointment from './pages/AddNewAppointment.jsx';  
 import ConfirmBooking from './pages/ConfirmBooking.jsx';
 import Login from './pages/Login.jsx';
-import Sidebar from "./Components/Sidebar.jsx";
 import Dashboard from './pages/Dashboard.jsx';
-import './App.css'
+import ProtectedRoute from './Components/ProtectedRoute.jsx';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 function App() {
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
 
-  const [token, setToken] = useState('');
+  // Save token on login
+  const handleSetToken = (newToken) => {
+    setToken(newToken);
+    localStorage.setItem('token', newToken);
+  };
 
   return (
-    <Router>  
+    <Router>
       <Navbar />
-      
+
       <Routes>
+        {/* Public Routes */}
         <Route path='/' element={<Home />} />
-        <Route path='/admin/dashboard' element={ <div> {!token ? <Login setToken={setToken} /> : <Dashboard token={token} />} </div> } />
         <Route path='/services' element={<Services />} />
         <Route path='/services/add' element={<ServiceForm />} />
         <Route path='/services/edit/:id' element={<ServiceForm />} />
-        
         <Route path='/about' element={<About />} />
-        <Route path='/admin/login' element={<div> <Login setToken={setToken} /></div>} />
-
-        
-        
         <Route path='/services/:id' element={<ServicesDetails />} />
         <Route path='/services/:id/add' element={<AddServicePicture />} />
-
-        <Route path='/appointments' element={<Appointments />} />
         <Route path='/new/appointments' element={<AddNewAppointment />} />
         <Route path='/ConfirmBooking' element={<ConfirmBooking />} />
+        <Route path='/admin/login' element={<Login setToken={handleSetToken} />} />
+
+        {/* Protected Routes */}
+        <Route
+          path='/admin/dashboard'
+          element={
+            <ProtectedRoute token={token}>
+              <Dashboard token={token} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/appointments'
+          element={
+            <ProtectedRoute token={token}>
+              <Appointments />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Fallback */}
         <Route path='*' element={<div>404 Not Found</div>} />
       </Routes>
-
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
