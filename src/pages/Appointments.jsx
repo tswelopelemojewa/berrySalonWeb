@@ -102,8 +102,6 @@ const updateStatus = async (appointmentId, userNumber, action) => {
           {/* ✅ IMAGE SECTION */}
           <Card.Body>
             <h4>{a.name}</h4>
-            
-            
 
             <p>
               <FaWhatsapp size={22} className="me-3 text-success" />

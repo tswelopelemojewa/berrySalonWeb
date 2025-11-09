@@ -6,13 +6,13 @@ function Policy() {
         style={{ width: '100%', maxWidth: '800px', padding: '20px' }}>
         <h4>Berry's Beauty Salon Customer Policy</h4><br />
 
-        <ul>
-            <p>1. A non refundable deposit of R50 secures your appointment. <strong>Please use your phone number as reference.</strong> KINDLY NOTE: NO BOOKING FEE NO APPOINTMENT!</p>
-            <p>2. Appointment reschedule is allowed <strong>10hrs before your appointment</strong>, failure to do so,your appointment is automatically cancelled and the deposit will be forfeited</p>
-            <p>3. <strong>Please Attend appointments alone to ensure confidentiality and personalised service</strong></p>
-            <p>4. Squeeze ins are based on my availability but with a fee of R50</p>
-            <p>5. I don't accept ewallet and cash send, if you're transferring please make it an immediate payment</p>
-        </ul>
+       
+        <p>1. A non refundable deposit of R50 secures your appointment. <strong>Please use your phone number as reference.</strong> KINDLY NOTE: NO BOOKING FEE NO APPOINTMENT!</p>
+        <p>2. Appointment reschedule is allowed <strong>10hrs before your appointment</strong>, failure to do so,your appointment is automatically cancelled and the deposit will be forfeited</p>
+        <p>3. <strong>Please Attend appointments alone to ensure confidentiality and personalised service</strong></p>
+        <p>4. Squeeze ins are based on my availability but with a fee of R50</p>
+        <p>5. I don't accept ewallet and cash send, if you're transferring please make it an immediate payment</p>
+
         <br />
         
         <h5>
