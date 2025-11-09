@@ -103,20 +103,22 @@ const updateStatus = async (appointmentId, userNumber, action) => {
           <Card.Body>
             <h4>{a.name}</h4>
             
-            <FaWhatsapp size={22} className="me-3 text-success" />
-              <div>
-                {/* <strong>WhatsApp</strong>
-                <br /> */}
-                <Link
-                  to={`https://wa.me/${a.user_number}`}
-                  // href="https://wa.me/27661278895" // 👈 Opens WhatsApp chat directly
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-decoration-none text-light"
-                >
-                  {a.user_number}
-                </Link>
-              </div>
+            
+
+            <p>
+              <FaWhatsapp size={22} className="me-3 text-success" />
+
+              <Link
+                to={`https://wa.me/${a.user_number}`}
+                // href="https://wa.me/27661278895" // 👈 Opens WhatsApp chat directly
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-light"
+              >
+                {a.user_number}
+              </Link>
+            </p>
+
             <p>{a.user_number}</p>
 
             <h5>{a.appointment_date}</h5>
