@@ -17,7 +17,7 @@ const About = () => {
           {/* Contact Information */}
           <Col
             md={12}
-            className= "text-center p-4 rounded-4 d-flex flex-column justify-content-center"
+            className=" text-center p-4 rounded-4 d-flex flex-column justify-content-center"
           >
             <h3 className="fw-bold mb-4">Get in Touch</h3> <hr />
 
@@ -26,7 +26,7 @@ const About = () => {
               <div>
                 <Link 
                   to={'https://maps.app.goo.gl/JsECWxnkeGPeLXSw9'} 
-                  className="text-decoration-none">
+                  className="text-decoration-none ">
                   Arcadia, Pretoria, South Africa
                 </Link>
                 
@@ -39,7 +39,7 @@ const About = () => {
 
                 <a
                   href="mailto:kgothatsokgatle11@gmail.com"
-                  className="text-decoration-none"
+                  className="text-decoration-none "
                 >
                   kgothatsokgatle11@gmail.com
                 </a>
@@ -53,7 +53,7 @@ const About = () => {
                 <br />
                 <a
                   href="tel:+27661278895"
-                  className="text-decoration-none"
+                  className="text-decoration-none "
                 >
                   +27 66 127 8895
                 </a>
@@ -69,7 +69,7 @@ const About = () => {
                   href="https://wa.me/27661278895" // 👈 Opens WhatsApp chat directly
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-decoration-none"
+                  className="text-decoration-none "
                 >
                   +27 66 127 8895
                 </a>
@@ -85,7 +85,7 @@ const About = () => {
                   to="https://www.tiktok.com/@berrymua11"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="
+                  className=""
                 >
                   @berrybeautysalon
                 </Link>
