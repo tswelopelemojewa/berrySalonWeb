@@ -11,7 +11,7 @@ const About = () => {
     // >
       <Card
         className="shadow rounded-4"
-        style={{ width: '100%', maxWidth: '900px', backgroundColor: '#212529' }}
+        style={{ width: '100%', maxWidth: '800px', backgroundColor: '#dadee2ff' }}
       >
         <Row>
           {/* Contact Information */}
