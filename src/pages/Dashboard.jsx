@@ -5,6 +5,8 @@ import axios from "axios";
 import Sidebar from "../Components/Sidebar.jsx";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
+const baseURL = 'https://berrysalon.onrender.com';
+
 const Dashboard = ({ token }) => {
   const [today, setToday] = useState([]);
   const [month, setMonth] = useState([]);
@@ -16,7 +18,7 @@ const Dashboard = ({ token }) => {
   useEffect(() => {
     axiosClient.get("/today/appointments").then((res) => setToday(res.data));
 
-    axios.get('http://localhost:3000/month/appointments', {
+    axios.get(`${baseURL}/month/appointments`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => setAppointments(res.data));
 

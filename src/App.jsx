@@ -10,6 +10,7 @@ import ServiceForm from './pages/ServiceForm.jsx';
 import Appointments from './pages/Appointments.jsx';
 import AddNewAppointment from './pages/AddNewAppointment.jsx';  
 import ConfirmBooking from './pages/ConfirmBooking.jsx';
+import Policy from './pages/Policy.jsx';
 import Login from './pages/Login.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import ProtectedRoute from './Components/ProtectedRoute.jsx';
@@ -40,6 +41,7 @@ function App() {
         <Route path='/services/:id/add' element={<AddServicePicture />} />
         <Route path='/new/appointments' element={<AddNewAppointment />} />
         <Route path='/ConfirmBooking' element={<ConfirmBooking />} />
+        <Route path='/policy' element={<Policy />} />
         <Route path='/admin/login' element={<Login setToken={handleSetToken} />} />
 
         {/* Protected Routes */}

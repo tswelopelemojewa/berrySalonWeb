@@ -13,6 +13,7 @@ const baseURL = "https://berrysalon.onrender.com";
 
 const Services = () => {
     const [services, setServices] = useState([]);
+    const [isAdmin, setIsAdmin] = useState(false);
     const navigate = useNavigate(); // 👈 Initialize useNavigate for the Edit button
 
     // 1. Unified Fetch function
@@ -26,9 +27,17 @@ const Services = () => {
         }
     };
 
+    // useEffect(() => {
+    //     fetchServices();
+    // }, []);
+
     useEffect(() => {
+        // Check if an admin token exists in localStorage
+        const token = localStorage.getItem('token');
+        setIsAdmin(!!token); // true if logged in
         fetchServices();
     }, []);
+
 
     // 2. Handle Delete Function
     const handleDelete = async (serviceId) => {
@@ -63,15 +72,16 @@ const Services = () => {
         <Container className="my-5">
             <h2 className="text-center mb-4 services-title" style={{padding: "20px"}} >Our Beauty Services</h2>
             <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-            
-            {/* The 'Add New Service' Card */}
-            <Card className="service-card h-100 text-center">   
-                <div className="service-img-container">
-                    <Link to={'/services/Add'} className="add-service-link">
-                        <IoIosAddCircleOutline className="add-icon" />  
+        
+            {isAdmin && (
+                <Card className="service-card h-100 text-center">   
+                    <div className="service-img-container">
+                    <Link to={'/services/add'} className="add-service-link">
+                        <IoIosAddCircleOutline className="add-icon" />  
                     </Link>
-                </div>
-            </Card>
+                    </div>
+                </Card>
+            )}
             
             {/* Map through existing services */}
             {services.map((service) => (
@@ -92,6 +102,7 @@ const Services = () => {
                                 />
                             </Link>
                         </div>
+                        
 
                         {/* Card Body */}
                         <Card.Body>
@@ -101,32 +112,45 @@ const Services = () => {
                             <p className="service-price">💅 R{service.Price}</p>
                             
                             {/* 4. Action Buttons Container */}
-                            <div className="d-flex justify-content-between align-items-center mt-3">
-                                <Link to={`/services/${service.id}`}>
-                                    <Button variant="primary" className="book-btn">View More</Button>
-                                </Link>
-                                
-                                {/* Update Button */}
-                                <Button 
-                                    variant="warning" 
-                                    size="sm" 
-                                    onClick={() => handleUpdate(service.id)} 
-                                    title="Edit Service"
-                                    className="mx-1"
-                                >
-                                    <FaEdit />
-                                </Button>
-                                
-                                {/* Delete Button */}
-                                <Button 
-                                    variant="danger" 
-                                    size="sm" 
-                                    onClick={() => handleDelete(service.id)} 
-                                    title="Delete Service"
-                                >
-                                    <FaTrash />
-                                </Button>
+                            <div className="mt-3">
+                                {/* Full-width View More button */}
+                                <div className="d-grid">
+                                    <Link to={`/services/${service.id}`} className="text-decoration-none">
+                                    <Button variant="primary" className="book-btn w-100" size="lg">
+                                        View More
+                                    </Button>
+                                    </Link>
+                                </div>
+
+                                {/* Admin buttons on a separate line */}
+                                {isAdmin && (
+                                    <div className="d-flex justify-content-end mt-2">
+                                    {/* Update Button */}
+                                    <Button
+                                        variant="warning"
+                                        size="lg"
+                                        onClick={() => handleUpdate(service.id)}
+                                        title="Edit Service"
+                                        className="mx-1 w-50"
+                                    >
+                                        <FaEdit />
+                                    </Button>
+
+                                    {/* Delete Button */}
+                                    <Button
+                                        variant="danger"
+                                        size="lg"
+                                        onClick={() => handleDelete(service.id)}
+                                        title="Delete Service"
+                                        className="mx-1 w-50"
+
+                                    >
+                                        <FaTrash />
+                                    </Button>
+                                    </div>
+                                )}
                             </div>
+
                             
                         </Card.Body>
                     </Card>
@@ -138,92 +162,3 @@ const Services = () => {
 };
 
 export default Services;
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Container, Row, Col, Card } from 'react-bootstrap';
-// import axiosClient from '../api/axiosClient';
-// import Button from 'react-bootstrap/Button';
-// import './Services.css'; // 👈 import your custom styles
-// import { Link } from 'react-router-dom';
-// import { IoIosAddCircleOutline } from "react-icons/io";
-
-
-// const baseURL = "https://berrysalon.onrender.com";
-
-// const Services = () => {
-//   const [services, setServices] = useState([]);
-  
-
-//   useEffect(() => {
-//     const fetchServices = async () => {
-//       try {
-//         const res = await axiosClient.get(`/services`);
-//         console.log('Fetched services:', res.data);
-//         setServices(res.data);
-//       } catch (error) {
-//         console.error('Error fetching services:', error);
-//       }
-//     };
-//     fetchServices();
-//   }, []);
-
-//   return (
-    
-//     <Container className="my-5">
-//       <h2 className="text-center mb-4 services-title" style={{padding: "20px"}} >Our Beauty Services</h2>
-//       <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-//       <Card className="service-card h-100 text-center">   
-//             <div className="service-img-container">
-//                 <Link to={'/services/Add'} className="add-service-link">
-//                     <IoIosAddCircleOutline className="add-icon" />  
-//                 </Link>
-                
-//             </div>
-//         </Card>
-//         {services.map((service) => (
-//           <Col key={service.id}>
-//             <Card className="service-card h-100 text-center">
-//               {/* ✅ IMAGE SECTION */}
-//               <div className="service-img-container">
-//                 <Link to={`/services/${service.id}`}>
-//                   <Card.Img
-//                     variant="top"
-//                     src={
-//                       service.coverImg
-//                         ? service.coverImg 
-//                         : `https://bygwxdfqsfvxfcgoyxzx.supabase.co/storage/v1/object/public/services/1760528900400.jpg`
-//                     }
-//                     alt={service.name}
-//                     className="service-img"
-//                   />
-//                 </Link>
-//               </div>
-
-//               {/* ✅ CARD BODY */}
-//               <Card.Body>
-//                 <Card.Title>{service.name}</Card.Title>
-//                 <Card.Text className="text-muted small">{service.description}</Card.Text>
-//                 <p>
-//                   ⏱ {Math.floor(service.duration_minutes / 60) > 0
-//                     ? `${Math.floor(service.duration_minutes / 60)} hour${
-//                         Math.floor(service.duration_minutes / 60) > 1 ? 's' : ''
-//                       } ${service.duration_minutes % 60 > 0 ? `${service.duration_minutes % 60} minute${service.duration_minutes % 60 > 1 ? 's' : ''}` : ''}`
-//                     : `${service.duration_minutes} minute${service.duration_minutes > 1 ? 's' : ''}`}
-//                 </p>
-//                 <p className="service-price">💅 R{service.Price}</p>
-//                 <Link to={`/services/${service.id}`}>
-//                   <Button variant="primary" className="book-btn">View More</Button>
-//                 </Link>
-                
-//               </Card.Body>
-//             </Card>
-            
-//           </Col>
-//         ))}
-//       </Row>
-//     </Container>
-//   );
-// };
-
-// export default Services;

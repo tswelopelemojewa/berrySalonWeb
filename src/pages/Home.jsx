@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'react-bootstrap/Image';
 import Services from "./Services.jsx";
 import Appointments from './Appointments.jsx';
+import AddNewAppointment from './AddNewAppointment.jsx';
 
 import { homeStyle } from '../Components/Navbar';
 import { Link } from 'react-router-dom';
@@ -28,21 +29,25 @@ export function Home() {
             <Link to="/new/appointments" style={{ textDecoration: 'none', color: 'white' }}>
             Book an Appointment
             </Link>
-            </button>
-            
+          </button>
             
         </div>
        
       
     </div>
-    {/* <br /> */}
+    <br />
     <div className="hero-section" style={{marginBlockStart: '650px'}} >
       <Services />
     </div>
     <br />
-    <div className="hero-section" style={{marginBlockStart: '20px'}} >
+    {/* <div className="hero-section" style={{marginBlockStart: '20px'}} >
       <Appointments />
     </div>
+    <br /> */}
+    <div className="hero-section" style={{marginBlockStart: '20px'}} >
+      <AddNewAppointment />
+    </div>
+
 
     </>
   );

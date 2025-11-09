@@ -257,7 +257,7 @@ const AddNewAppointment = () => {
 
   return (
     <div className="form-control" style={{ maxWidth: '800px', margin: 'auto', padding: '30px' }}>
-      <h3 style={{ paddingBottom: '16px' }}>Add New Appointment</h3>
+      <h3 style={{ paddingBottom: '16px' }}>Book an Appointment</h3>
 
       <form onSubmit={handleSubmit}>
         {error && <p style={{ color: 'red' }}>{error}</p>}
