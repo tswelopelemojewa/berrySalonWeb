@@ -25,14 +25,22 @@ const AddServicePicture = () => {
 
     // prepare the form data
     const formData = new FormData();
+    // formData.append("images", file1);
+    // formData.append("images", file2); 
+    console.log('formData: ', formData)
     formData.append('service_id', id);
+
     for (let i = 0; i < selectedFiles.length; i++) {
       formData.append('images', selectedFiles[i]);
     }
     try {
       const res = await axios.post(`${baseURL}/services/${id}/add`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      // console.log("Received files:", req.files);
+      // console.log("Params:", req.params);
+
       console.log('Upload successful:', res.data);
       //alert('Images uploaded successfully!');
       useSelectedFiles([]);

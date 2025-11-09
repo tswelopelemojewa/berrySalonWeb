@@ -69,7 +69,7 @@ const Services = () => {
 
 
     return (
-        <Container className="my-5">
+            <Container className="my-5" style={{passing: '30px'}}>
             <h2 className="text-center mb-4 services-title" style={{padding: "20px"}} >Our Beauty Services</h2>
             <Row xs={1} sm={2} md={3} lg={4} className="g-4">
         
