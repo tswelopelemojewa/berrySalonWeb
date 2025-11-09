@@ -17,7 +17,7 @@ const About = () => {
           {/* Contact Information */}
           <Col
             md={12}
-            className= text-center p-4 rounded-4 d-flex flex-column justify-content-center"
+            className= "text-center p-4 rounded-4 d-flex flex-column justify-content-center"
           >
             <h3 className="fw-bold mb-4">Get in Touch</h3> <hr />
 
