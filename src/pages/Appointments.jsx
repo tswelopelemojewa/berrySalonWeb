@@ -111,13 +111,13 @@ const updateStatus = async (appointmentId, userNumber, action) => {
                 // href="https://wa.me/27661278895" // 👈 Opens WhatsApp chat directly
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-decoration-none"
+                className="text-decoration-none text-dark"
               >
                 {a.user_number}
               </Link>
             </p>
 
-            <p>{a.user_number}</p>
+            {/* <p>{a.user_number}</p> */}
 
             <h5>{a.appointment_date}</h5>
             <p>{a.StartTime} - {a.EndTime}</p>
