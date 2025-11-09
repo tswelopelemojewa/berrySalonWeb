@@ -3,7 +3,7 @@ import React from 'react'
 function Policy() {
   return (
      <div className="shadow rounded-4"
-        style={{ width: '100%', maxWidth: '900px', backgroundColor: '#212529', padding: '20px' }}>
+        style={{ width: '100%', maxWidth: '800px', padding: '20px' }}>
         <h4>Berry's Beauty Salon Customer Policy</h4><br />
 
         <ul>
