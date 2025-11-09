@@ -4,6 +4,7 @@ import { Tab, Nav, Table } from 'react-bootstrap';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { BsCheckCircle, BsCheckCircleFill, BsDashCircleDotted } from "react-icons/bs";
+import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaTiktok, FaWhatsapp } from 'react-icons/fa';
 import './Appointments.css';
 
 export function AppointmentsPage() {
@@ -101,7 +102,23 @@ const updateStatus = async (appointmentId, userNumber, action) => {
           {/* ✅ IMAGE SECTION */}
           <Card.Body>
             <h4>{a.name}</h4>
+            
+            <FaWhatsapp size={22} className="me-3 text-success" />
+              <div>
+                {/* <strong>WhatsApp</strong>
+                <br /> */}
+                <Link
+                  to={`https://wa.me/${a.user_number}`}
+                  // href="https://wa.me/27661278895" // 👈 Opens WhatsApp chat directly
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-decoration-none text-light"
+                >
+                  {a.user_number}
+                </Link>
+              </div>
             <p>{a.user_number}</p>
+
             <h5>{a.appointment_date}</h5>
             <p>{a.StartTime} - {a.EndTime}</p>
             <p>{a.status}</p>
