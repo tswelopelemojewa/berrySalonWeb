@@ -84,81 +84,170 @@ const Services = () => {
             )}
             
             {/* Map through existing services */}
-            {services.map((service) => (
-                <Col key={service.id}>
-                    <Card className="service-card h-100 text-center">
-                        {/* Image Section */}
-                        <div className="service-img-container">
-                            <Link to={`/services/${service.id}`}>
-                                <Card.Img
-                                    variant="top"
-                                    src={
-                                        service.coverImg
-                                            ? service.coverImg 
-                                            : `https://bygwxdfqsfvxfcgoyxzx.supabase.co/storage/v1/object/public/services/default_cover.jpg` // Use a proper default
-                                    }
-                                    alt={service.name}
-                                    className="service-img"
-                                />
-                            </Link>
-                        </div>
-                        
+            
+            
+            {services
+  .filter(service => {
+    if (!isAdmin) {
+      return !service.name.toLowerCase().includes("personal");
+    }
+    return true;
+  })
+  .map((service) => (
+    <Col key={service.id}>
+      <Card className="service-card h-100 text-center">
 
-                        {/* Card Body */}
-                        <Card.Body>
-                            <Card.Title>{service.name}</Card.Title>
-                            <Card.Text className="text-muted small">{service.description}</Card.Text>
-                            {/* Duration and Price display logic here... */}
-                            <p className="service-price">💅 R{service.Price}</p>
-                            
-                            {/* 4. Action Buttons Container */}
-                            <div className="mt-3">
-                                {/* Full-width View More button */}
-                                <div className="d-grid">
-                                    <Link to={`/services/${service.id}`} className="text-decoration-none">
-                                    <Button variant="primary" className="book-btn w-100" size="lg">
-                                        View More
-                                    </Button>
-                                    </Link>
-                                </div>
+        <div className="service-img-container">
+          <Link to={`/services/${service.id}`}>
+            <Card.Img
+              variant="top"
+              src={
+                service.coverImg
+                  ? service.coverImg 
+                  : `https://bygwxdfqsfvxfcgoyxzx.supabase.co/storage/v1/object/public/services/default_cover.jpg`
+              }
+              alt={service.name}
+              className="service-img"
+            />
+          </Link>
+        </div>
 
-                                {/* Admin buttons on a separate line */}
-                                {isAdmin && (
-                                    <div className="d-flex justify-content-end mt-2">
-                                    {/* Update Button */}
-                                    <Button
-                                        variant="warning"
-                                        size="lg"
-                                        onClick={() => handleUpdate(service.id)}
-                                        title="Edit Service"
-                                        className="mx-1 w-50"
-                                    >
-                                        <FaEdit />
-                                    </Button>
+        <Card.Body>
+          <Card.Title>{service.name}</Card.Title>
+          <Card.Text className="text-muted small">{service.description}</Card.Text>
 
-                                    {/* Delete Button */}
-                                    <Button
-                                        variant="danger"
-                                        size="lg"
-                                        onClick={() => handleDelete(service.id)}
-                                        title="Delete Service"
-                                        className="mx-1 w-50"
+          <p>
+            {Math.floor(service.duration_minutes / 60) > 0
+              ? `${Math.floor(service.duration_minutes / 60)} hour${
+                  Math.floor(service.duration_minutes / 60) > 1 ? 's' : ''
+                } ${service.duration_minutes % 60 > 0
+                  ? `${service.duration_minutes % 60} minute${service.duration_minutes % 60 > 1 ? 's' : ''}`
+                  : ''}`
+              : `${service.duration_minutes} minute${service.duration_minutes > 1 ? 's' : ''}`}
+          </p>
 
-                                    >
-                                        <FaTrash />
-                                    </Button>
-                                    </div>
-                                )}
-                            </div>
+          <p className="service-price">💅 R{service.Price}</p>
 
-                            
-                        </Card.Body>
-                    </Card>
-                </Col>
-            ))}
+          <div className="mt-3">
+            <div className="d-grid">
+              <Link to={`/services/${service.id}`} className="text-decoration-none">
+                <Button variant="primary" className="book-btn w-100" size="lg">
+                  View More
+                </Button>
+              </Link>
+            </div>
+
+            {isAdmin && (
+              <div className="d-flex justify-content-end mt-2">
+                <Button
+                  variant="warning"
+                  size="lg"
+                  onClick={() => handleUpdate(service.id)}
+                  className="mx-1 w-50"
+                >
+                  <FaEdit />
+                </Button>
+
+                <Button
+                  variant="danger"
+                  size="lg"
+                  onClick={() => handleDelete(service.id)}
+                  className="mx-1 w-50"
+                >
+                  <FaTrash />
+                </Button>
+              </div>
+            )}
+          </div>
+
+        </Card.Body>
+      </Card>
+    </Col>
+))}
+
             </Row>
         </Container>
     );
 };
 
 export default Services;
+
+
+// {services.map((service) => (
+//                 <Col key={service.id}>
+//                     <Card className="service-card h-100 text-center">
+//                         {/* Image Section */}
+//                         <div className="service-img-container">
+//                             <Link to={`/services/${service.id}`}>
+//                                 <Card.Img
+//                                     variant="top"
+//                                     src={
+//                                         service.coverImg
+//                                             ? service.coverImg 
+//                                             : `https://bygwxdfqsfvxfcgoyxzx.supabase.co/storage/v1/object/public/services/default_cover.jpg` // Use a proper default
+//                                     }
+//                                     alt={service.name}
+//                                     className="service-img"
+//                                 />
+//                             </Link>
+//                         </div>
+                        
+
+//                         {/* Card Body */}
+//                         <Card.Body>
+//                             <Card.Title>{service.name}</Card.Title>
+//                             <Card.Text className="text-muted small">{service.description}</Card.Text>
+//                             {/* Duration and Price display logic here... */}
+//                             {/* <p className="text-muted small">{service.duration_minutes}</p> */}
+//                             <p>{Math.floor(service.duration_minutes / 60) > 0
+//                                 ? `${Math.floor(service.duration_minutes / 60)} hour${
+//                                     Math.floor(service.duration_minutes / 60) > 1 ? 's' : ''
+//                                     } ${service.duration_minutes % 60 > 0 ? `${service.duration_minutes % 60} minute${service.duration_minutes % 60 > 1 ? 's' : ''}` : ''}`
+//                                 : `${service.duration_minutes} minute${service.duration_minutes > 1 ? 's' : ''}`}</p>
+//                             <p className="service-price">💅 R{service.Price}</p>
+                            
+//                             {/* 4. Action Buttons Container */}
+//                             <div className="mt-3">
+//                                 {/* Full-width View More button */}
+//                                 <div className="d-grid">
+//                                     <Link to={`/services/${service.id}`} className="text-decoration-none">
+//                                     <Button variant="primary" className="book-btn w-100" size="lg">
+//                                         View More
+//                                     </Button>
+//                                     </Link>
+//                                 </div>
+
+//                                 {/* Admin buttons on a separate line */}
+//                                 {isAdmin && (
+//                                     <div className="d-flex justify-content-end mt-2">
+//                                     {/* Update Button */}
+//                                     <Button
+//                                         variant="warning"
+//                                         size="lg"
+//                                         onClick={() => handleUpdate(service.id)}
+//                                         title="Edit Service"
+//                                         className="mx-1 w-50"
+//                                     >
+//                                         <FaEdit />
+//                                     </Button>
+
+//                                     {/* Delete Button */}
+//                                     <Button
+//                                         variant="danger"
+//                                         size="lg"
+//                                         onClick={() => handleDelete(service.id)}
+//                                         title="Delete Service"
+//                                         className="mx-1 w-50"
+
+//                                     >
+//                                         <FaTrash />
+//                                     </Button>
+//                                     </div>
+//                                 )}
+//                             </div>
+
+                            
+//                         </Card.Body>
+//                     </Card>
+//                 </Col>
+//             ))}
