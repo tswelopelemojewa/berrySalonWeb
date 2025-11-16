@@ -29,6 +29,7 @@ function Navigation() {
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/Services">Services</Nav.Link>
+              <Nav.Link href="/new/appointments">Book Appointment</Nav.Link>
               <Nav.Link href="/policy">Policy</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="/admin/dashboard">Dashboard</Nav.Link>
