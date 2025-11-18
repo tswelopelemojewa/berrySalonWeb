@@ -331,7 +331,7 @@ const [isAdmin, setIsAdmin] = useState(false);
               <Form.Control
                 type="text"
                 name="user_number"
-                placeholder="e.g. 27831234567"
+                placeholder="e.g. +27831234567"
                 value={formData.user_number}
                 onChange={handleChange}
                 required
