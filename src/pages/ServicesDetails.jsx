@@ -120,16 +120,31 @@ const ServicesDetails = () => {
 
     if (!imagesAvailable) {
       return (
-        <div className="text-center my-5">
-            <Card className="service-card h-100 text-center">   
-                <div className="service-img-container">
-                    <Link to={`/services/${id}/add`} className="add-service-link">
-                        <IoIosAddCircleOutline className="add-icon" />
-                    </Link>
-                </div>
-            </Card>
-            <p className='mt-3'>No images found. Click the '+' to add one!</p>
+        <>
+  {isAdmin ? (
+    // IF ADMIN
+    <div className="text-center my-5">
+      <Card className="service-card h-100 text-center">
+        <div className="service-img-container">
+          <Link to={`/services/${id}/add`} className="add-service-link">
+            <IoIosAddCircleOutline className="add-icon" />
+          </Link>
         </div>
+      </Card>
+      <p className="mt-3">No images found. Click the '+' to add one!</p>
+    </div>
+  ) : (
+    // ELSE (NOT ADMIN)
+    <div className="text-center my-5">
+      <Card className="service-card h-100 text-center">
+        <div className="service-img-container">
+          <p className="mt-3">No images added yet.</p>
+        </div>
+      </Card>
+    </div>
+  )}
+</>
+
       );
     }
 
