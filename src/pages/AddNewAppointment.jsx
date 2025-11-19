@@ -259,11 +259,14 @@ const AddNewAppointment = () => {
     if (name === "time") {
       const selected = value; // "HH:mm"
 
-      if (selected < "06:00" || selected >= "16:00") {
-        setTimeError(true);
-      } else {
-        setTimeError(false);
+      if(!isAdmin){
+        if (selected < "06:00" || selected >= "16:00") {
+          setTimeError(true);
+        } else {
+          setTimeError(false);
+        }
       }
+      
     }
 
     setFormData((p) => ({ ...p, [name]: value }));
