@@ -165,7 +165,7 @@ const TimeSlotSelector = ({ date, serviceDurationMinutes, onSelectTime }) => {
       ) : (
         <div>
           <div className="d-flex align-items-center mb-2">
-            <strong style={{ marginRight: 12 }}>Time slots ({formatTime(new Date(`${date}T00:00:00`))} → next day)</strong>
+            <strong style={{ marginRight: 12 }}>Time slots ({formatTime(new Date(`${date}T06:00:00`))} → {formatTime(new Date(`${date}T16:00:00`))})</strong>
             <Badge bg="success" className="me-1">Available</Badge>
             <Badge bg="danger" className="me-3">Booked</Badge>
             <small className="text-muted">Click an available slot to auto-fill the Time field.</small>
@@ -237,7 +237,8 @@ const AddNewAppointment = () => {
   const [services, setServices] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [timeError, setTimeError] = useState(false); // <-- Track invalid time
 
   // Fetch available services
   useEffect(() => {
@@ -253,6 +254,18 @@ const [isAdmin, setIsAdmin] = useState(false);
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // -- Time Validation --
+    if (name === "time") {
+      const selected = value; // "HH:mm"
+
+      if (selected < "06:00" || selected >= "16:00") {
+        setTimeError(true);
+      } else {
+        setTimeError(false);
+      }
+    }
+
     setFormData((p) => ({ ...p, [name]: value }));
   };
 
@@ -304,7 +317,7 @@ const [isAdmin, setIsAdmin] = useState(false);
       <h3 style={{ paddingBottom: '16px' }}>Book an Appointment</h3>
 
       <form onSubmit={handleSubmit}>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        
 
         {/* Name */}
         <div style={{ marginBottom: '10px' }}>
@@ -415,7 +428,7 @@ const [isAdmin, setIsAdmin] = useState(false);
         </div>
 
         {/* Time Picker (filled when user clicks a slot) */}
-        <div style={{ marginBottom: '10px' }}>
+        {/* <div style={{ marginBottom: '10px' }}>
           <Form.Group as={Row} className="mb-2" controlId="formTime">
             <Form.Label column sm="3">Time:</Form.Label>
             <Col sm="9">
@@ -428,14 +441,50 @@ const [isAdmin, setIsAdmin] = useState(false);
               />
             </Col>
           </Form.Group>
-        </div>
+        </div> */}
+
+          <div style={{ marginBottom: '10px' }}>
+            <Form.Group as={Row} className="mb-2" controlId="formTime">
+              <Form.Label column sm="3">Time:</Form.Label>
+              <Col sm="9">
+                <Form.Control
+                  type="time"
+                  name="time"
+                  value={formData.time}
+                  onChange={handleChange}
+                  required
+                />
+
+                {timeError && (
+                  <p style={{ color: 'red', marginTop: '5px' }}>
+                    Time must be between 06:00 and 16:00.
+                  </p>
+                )}
+              </Col>
+            </Form.Group>
+          </div>
+
 
         {/* Submit */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <button style={{ marginTop: '10px' }} className="btn btn-success" type="submit" disabled={loading}>
             {loading ? 'Saving...' : 'Add Appointment'}
           </button>
-        </div>
+        </div> */}
+        
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <button 
+              style={{ marginTop: '10px' }} 
+              className="btn btn-success" 
+              type="submit" 
+              disabled={loading || timeError}   // <-- Add timeError here
+            >
+              {loading ? 'Saving...' : 'Add Appointment'}
+            </button>
+          </div>
+
+
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
     </div>
   );
