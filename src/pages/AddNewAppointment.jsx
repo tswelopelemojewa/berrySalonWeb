@@ -457,9 +457,10 @@ const AddNewAppointment = () => {
 
                 {timeError && (
                   <p style={{ color: 'red', marginTop: '5px' }}>
-                    Time must be between 06:00 and 16:00.
+                    Sorry, Time must be between 06:00 and 16:00.
                   </p>
                 )}
+                {error && <p style={{ color: 'red', marginTop: '5px' }}>{error}</p>}
               </Col>
             </Form.Group>
           </div>
@@ -471,6 +472,8 @@ const AddNewAppointment = () => {
             {loading ? 'Saving...' : 'Add Appointment'}
           </button>
         </div> */}
+        
+
         
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button 
@@ -484,7 +487,7 @@ const AddNewAppointment = () => {
           </div>
 
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        
       </form>
     </div>
   );
