@@ -104,7 +104,7 @@ const updateStatus = async (appointmentId, userNumber, action) => {
             <h4>{a.name}</h4>
 
             <p>
-              <FaWhatsapp size={22} className="me-3 text-success" />
+              
 
               <Link
                 to={`https://wa.me/${a.user_number}`}
@@ -112,7 +112,7 @@ const updateStatus = async (appointmentId, userNumber, action) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-decoration-none text-dark"
-              >
+              ><FaWhatsapp size={22} className=" text-success" />
                 {a.user_number}
               </Link>
             </p>

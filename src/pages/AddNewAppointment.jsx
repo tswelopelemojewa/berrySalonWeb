@@ -251,26 +251,70 @@ const AddNewAppointment = () => {
       setIsAdmin(!!token);
   }, []);
 
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+// Handle input changes
+// Handle input changes
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  let newValue = value; // default
 
-    // -- Time Validation --
-    if (name === "time") {
-      const selected = value; // "HH:mm"
+  // ---------------------
+  // TIME VALIDATION
+  // ---------------------
+  if (name === "time") {
+    const selected = value; // "HH:mm"
 
-      if(!isAdmin){
-        if (selected < "06:00" || selected >= "16:00") {
-          setTimeError(true);
-        } else {
-          setTimeError(false);
-        }
+    if (!isAdmin) {
+      if (selected < "06:00" || selected >= "16:00") {
+        setTimeError(true);
+      } else {
+        setTimeError(false);
       }
-      
+    }
+  }
+
+  // ---------------------
+  // PHONE NUMBER NORMALISATION (+ remove spaces)
+  // ---------------------
+  if (name === "user_number") {
+
+    // 1️⃣ Remove ALL spaces, dashes, brackets etc.
+    let cleaned = value.replace(/[^\d+]/g, ""); 
+    // keeps digits and + only
+
+    // 2️⃣ Remove "+" if it's not at the start
+    if (cleaned.length > 1) {
+      cleaned = cleaned[0] + cleaned.substring(1).replace(/\+/g, "");
     }
 
-    setFormData((p) => ({ ...p, [name]: value }));
-  };
+    // 3️⃣ If starts with 0 → convert to +27
+    if (cleaned.startsWith("0")) {
+      cleaned = "+27" + cleaned.substring(1);
+    }
+
+    // 4️⃣ If starts with 27 (no +) → convert to +27
+    else if (cleaned.startsWith("27") && !cleaned.startsWith("+27")) {
+      cleaned = "+" + cleaned;
+    }
+
+    // 5️⃣ If user typed "+27" manually → keep it valid
+    else if (cleaned.startsWith("+27")) {
+      // do nothing — already correct
+    }
+
+    // Set processed value
+    newValue = cleaned;
+  }
+
+  // ---------------------
+  // UPDATE FORM DATA
+  // ---------------------
+  setFormData((prev) => ({
+    ...prev,
+    [name]: newValue,
+  }));
+};
+
+
 
   // Submit form
   const handleSubmit = async (e) => {
