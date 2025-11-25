@@ -363,7 +363,7 @@ const handleChange = (e) => {
     <div className="form-control" style={{ maxWidth: '800px', margin: 'auto', padding: '30px' }}>
       <h3 style={{ paddingBottom: '16px' }}>Book an Appointment</h3>
        <div style={{ marginBottom: '10px' }}>
-          <Alert variant="warning">Kindly note that from <strong>20-12-2025 - 04-01-2026</strong> I will <strong>NOT</strong> be around Pretoria</Alert>
+          <Alert variant="warning">Kindly note that from <strong>13-12-2025 - 04-01-2026</strong> I will <strong>NOT</strong> be around Pretoria</Alert>
         </div>
       <form onSubmit={handleSubmit}>
         
