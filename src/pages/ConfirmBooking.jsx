@@ -67,7 +67,7 @@ Hello, I just booked an appointment:
 📅 Date: ${formattedDate}
 ⏰ Time: ${time}
 
-Please confirm on your side before I pay the ${deposit} booking fee. Thank you!`;
+Please confirm on your side before I pay the R${deposit} booking fee. Thank you!`;
 
   // Encode it for URL
   const encodedMessage = encodeURIComponent(message);
