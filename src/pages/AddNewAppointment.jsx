@@ -264,7 +264,7 @@ const handleChange = (e) => {
     const selected = value; // "HH:mm"
 
     if (!isAdmin) {
-      if (selected < "06:00" || selected >= "16:00") {
+      if (selected < "06:00" || selected >= "15:10") {
         setTimeError(true);
       } else {
         setTimeError(false);
@@ -317,34 +317,37 @@ const handleChange = (e) => {
 
 
   // Submit form
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  setLoading(true);
 
-    try {
-      await axios.post(`${baseURL}/new/appointments`, formData);
-      alert('Appointment created successfully!');
-      setFormData({
-        name: '',
-        user_number: '',
-        serviceId: '',
-        date: '',
-        time: ''
-      });
+  try {
+    await axios.post(`${baseURL}/new/appointments`, formData);
 
-      navigate('/ConfirmBooking');
+    navigate('/ConfirmBooking', {
+      state: { ...formData }
+    });
 
-    } catch (err) {
-      if (err.response?.status === 400) {
-        setError(err.response.data.error || 'That slot is already booked.');
-      } else {
-        setError('Something went wrong, please try again.');
-      }
-    } finally {
-      setLoading(false);
+    setFormData({
+      name: '',
+      user_number: '',
+      serviceId: '',
+      date: '',
+      time: ''
+    });
+
+  } catch (err) {
+    if (err.response?.status === 400) {
+      setError(err.response.data.error || 'That slot is already booked.');
+    } else {
+      setError('Something went wrong, please try again.');
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   // find selected service duration (in minutes)
   const selectedService = services.find((s) => String(s.id) === String(formData.serviceId));
@@ -508,7 +511,7 @@ const handleChange = (e) => {
 
                 {timeError && (
                   <p style={{ color: 'red', marginTop: '5px' }}>
-                    Sorry, Time must be between 06:00 and 16:00.
+                    Sorry, we only operate between 06:00 and 16:00. If your appointment extends beyond closing time, please select an earlier time.
                   </p>
                 )}
                 {error && <p style={{ color: 'red', marginTop: '5px' }}>{error}</p>}
