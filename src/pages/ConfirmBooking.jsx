@@ -78,7 +78,7 @@ Please confirm on your side before I pay the ${deposit} booking fee. Thank you!`
 
 
   return (
-  <div style={{ maxWidth: "750px", margin: "0 auto", padding: "25px" }}>
+  <div style={{ maxWidth: "750px", margin: "0 auto", padding: "10px" }}>
 
     <h2 style={{ paddingBottom: "10px", paddingTop: "20px", textAlign: "center" }}>
       Appointment Booked Successfully 🎉
@@ -89,15 +89,7 @@ Please confirm on your side before I pay the ${deposit} booking fee. Thank you!`
     </p>
 
     {/* Policy Section */}
-    <div
-      style={{
-        background: "#fff8e6",
-        padding: "20px",
-        borderRadius: "8px",
-        border: "1px solid #f1d49c",
-        marginTop: "20px"
-      }}
-    >
+    <div >
       <Policy />
     </div>
 
@@ -117,7 +109,7 @@ Please confirm on your side before I pay the ${deposit} booking fee. Thank you!`
     <div
       style={{
         marginTop: "30px",
-        padding: "20px",
+        padding: "1px",
         background: "#f8f9fb",
         borderRadius: "8px",
         border: "1px solid #e1e1e1"
