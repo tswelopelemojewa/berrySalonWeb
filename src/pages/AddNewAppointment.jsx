@@ -13,7 +13,7 @@ const TimeSlotSelector = ({ date, serviceDurationMinutes, onSelectTime }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const workingHoursStart = 6;  // 6 AM
-  const workingHoursEnd = 16;   // 3 PM
+  const workingHoursEnd = 16;   // 4 PM
 
  
   // Fetch upcoming appointments (we'll filter client-side by date)
@@ -48,6 +48,10 @@ const TimeSlotSelector = ({ date, serviceDurationMinutes, onSelectTime }) => {
       })
       .finally(() => setLoading(false));
   }, [date]);
+
+
+
+
 
   // Generate slots across 24 hours based on service duration
 // const slots = useMemo(() => {
@@ -250,6 +254,17 @@ const AddNewAppointment = () => {
       const token = localStorage.getItem("token");
       setIsAdmin(!!token);
   }, []);
+
+  // EFFECT 2: Clear error after 5 seconds
+  useEffect(() => {
+    if (!error) return;
+
+    const timer = setTimeout(() => {
+      setError("");
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [error]);
 
 // Handle input changes
 // Handle input changes
@@ -514,21 +529,12 @@ const handleSubmit = async (e) => {
                     Sorry, we only operate between 06:00 and 16:00. If your appointment extends beyond closing time, please select an earlier time.
                   </p>
                 )}
+
                 {error && <p style={{ color: 'red', marginTop: '5px' }}>{error}</p>}
               </Col>
             </Form.Group>
           </div>
 
-
-        {/* Submit */}
-        {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <button style={{ marginTop: '10px' }} className="btn btn-success" type="submit" disabled={loading}>
-            {loading ? 'Saving...' : 'Add Appointment'}
-          </button>
-        </div> */}
-        
-
-        
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button 
               style={{ marginTop: '10px' }} 
